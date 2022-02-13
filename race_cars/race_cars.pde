@@ -33,6 +33,8 @@ void draw() {
    }
    }*/
   //
+
+  text("click for at eliminere dårlige biler", 10, 450);
 }
 
 void mouseClicked() {
@@ -58,21 +60,28 @@ void newGeneration(CarSystem carSys) {
       Comparator<CarController> sortCarControllerDescending = new Comparator<CarController>() {
         @Override 
           public int compare(CarController c1, CarController c2) {
-          return (c2.sensorSystem.whiteSensorFrameCount < c1.sensorSystem.whiteSensorFrameCount ? -1 : (c2.sensorSystem.whiteSensorFrameCount == c1.sensorSystem.whiteSensorFrameCount) ? 0:1);
+          return (giveScore(c1) - giveScore(c2));
         }
       };
       Collections.sort(onTrackCarControllerList, sortCarControllerDescending);
       //println(onTrackCarControllerList.get(0).sensorSystem.whiteSensorFrameCount);
       //println(onTrackCarControllerList.get(onTrackCarControllerList.size()-1).sensorSystem.whiteSensorFrameCount);//giver mest optimale
     }
-    
+
 
     //else{
 
     //carSys.CarControllerList.remove(carSys.CarControllerList.get(i));
     //}
-  } for (int i = 0; i < carSys.CarControllerList.size(); i++) {
+  } 
+  for (int i = 0; i < carSys.CarControllerList.size(); i++) {
     carSys.CarControllerList.get(i).copyNeuNet(onTrackCarControllerList.get(onTrackCarControllerList.size()-1).hjerne);
     carSys.CarControllerList.get(i).bil = new Car();
-    }
+  }
+}
+
+int giveScore(CarController car) {
+  if (car.sensorSystem.whiteSensorFrameCount > 0)
+    return 0;
+  return car.sensorSystem.clockWiseRotationFrameCounter;
 }

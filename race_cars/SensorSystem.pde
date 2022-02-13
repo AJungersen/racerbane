@@ -21,7 +21,7 @@ class SensorSystem {
   //clockwise rotation detection
   PVector centerToCarVector     = new PVector();
   float   lastRotationAngle   = -1;
-  float   clockWiseRotationFrameCounter  = 0;
+  int     clockWiseRotationFrameCounter  = 0;
 
   //lapTime calculation
   boolean lastGreenDetection;
