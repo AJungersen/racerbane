@@ -35,6 +35,12 @@ void draw() {
   //
 }
 
+void mouseClicked() {
+  newGeneration(carSystem);
+}
+
+
+
 
 
 
@@ -55,15 +61,18 @@ void newGeneration(CarSystem carSys) {
           return (c2.sensorSystem.whiteSensorFrameCount < c1.sensorSystem.whiteSensorFrameCount ? -1 : (c2.sensorSystem.whiteSensorFrameCount == c1.sensorSystem.whiteSensorFrameCount) ? 0:1);
         }
       };
-      Collections.sort(onTrackCarControllerList,sortCarControllerDescending);
-      
-      
-      
-      
-      
-    } else{
-      
-    carSys.CarControllerList.remove(carSys.CarControllerList.get(i));
+      Collections.sort(onTrackCarControllerList, sortCarControllerDescending);
+      //println(onTrackCarControllerList.get(0).sensorSystem.whiteSensorFrameCount);
+      //println(onTrackCarControllerList.get(onTrackCarControllerList.size()-1).sensorSystem.whiteSensorFrameCount);//giver mest optimale
     }
-  }
+    
+
+    //else{
+
+    //carSys.CarControllerList.remove(carSys.CarControllerList.get(i));
+    //}
+  } for (int i = 0; i < carSys.CarControllerList.size(); i++) {
+    carSys.CarControllerList.get(i).copyNeuNet(onTrackCarControllerList.get(onTrackCarControllerList.size()-1).hjerne);
+    carSys.CarControllerList.get(i).bil = new Car();
+    }
 }

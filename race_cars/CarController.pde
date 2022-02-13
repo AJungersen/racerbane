@@ -4,6 +4,10 @@ class CarController {
   Car bil                    = new Car();
   NeuralNetwork hjerne       = new NeuralNetwork(varians); 
   SensorSystem  sensorSystem = new SensorSystem();
+  
+  void copyNeuNet(NeuralNetwork neuNet){
+  hjerne = new NeuralNetwork(neuNet);
+  }    
       
   void update() {
     //1.)opdtarer bil 
